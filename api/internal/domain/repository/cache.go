@@ -1,6 +1,13 @@
 package repository
 
-import "context"
+import (
+	"context"
+	"errors"
+)
+
+var (
+	CacheNotFountError = errors.New("не удалось найти запись")
+)
 
 // Интерфейс репозитория кэша
 type CacheRepositoryInterface interface {
