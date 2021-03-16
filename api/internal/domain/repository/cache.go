@@ -17,6 +17,14 @@ type CacheRepositoryInterface interface {
 	Delete(ctx context.Context, key string) error
 }
 
+// Создает новую структуру кэша
+func NewCache(key, value string) *Cache {
+	return &Cache{
+		Kye:   key,
+		Value: value,
+	}
+}
+
 // Сущность кэша
 type Cache struct {
 	// Ключ кэша
