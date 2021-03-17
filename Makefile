@@ -1,3 +1,5 @@
+run: build up
+
 build:
 	docker build -t "cacher:1.0" .
 
