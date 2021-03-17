@@ -3,8 +3,8 @@ package handler
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
-	"github.com/koind/cacher/api/internal/domain/repository"
-	"github.com/koind/cacher/api/internal/domain/service"
+	"github.com/koind/cacher/internal/domain/repository"
+	"github.com/koind/cacher/internal/domain/service"
 	"io/ioutil"
 	"net/http"
 )

@@ -2,7 +2,7 @@ package memory
 
 import (
 	"context"
-	"github.com/koind/cacher/api/internal/domain/repository"
+	"github.com/koind/cacher/internal/domain/repository"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

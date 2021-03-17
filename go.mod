@@ -1,4 +1,4 @@
-module github.com/koind/cacher/api
+module github.com/koind/cacher
 
 go 1.13
 

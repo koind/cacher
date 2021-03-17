@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	"github.com/koind/cacher/api/internal/domain/repository"
+	"github.com/koind/cacher/internal/domain/repository"
 )
 
 // Сервис кэша

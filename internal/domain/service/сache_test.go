@@ -2,8 +2,8 @@ package service
 
 import (
 	"context"
-	"github.com/koind/cacher/api/internal/domain/repository"
-	"github.com/koind/cacher/api/internal/storage/memory"
+	"github.com/koind/cacher/internal/domain/repository"
+	"github.com/koind/cacher/internal/storage/memory"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

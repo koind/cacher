@@ -2,10 +2,10 @@ package main
 
 import (
 	"context"
-	"github.com/koind/cacher/api/internal/config"
-	"github.com/koind/cacher/api/internal/domain/service"
-	"github.com/koind/cacher/api/internal/handler"
-	"github.com/koind/cacher/api/internal/storage/memory"
+	"github.com/koind/cacher/internal/config"
+	"github.com/koind/cacher/internal/domain/service"
+	"github.com/koind/cacher/internal/handler"
+	"github.com/koind/cacher/internal/storage/memory"
 	"github.com/spf13/pflag"
 	"log"
 	"os"
