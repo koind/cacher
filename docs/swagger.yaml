@@ -1,0 +1,161 @@
+basePath: /
+definitions:
+  handler.response:
+    properties:
+      data:
+        description: Тело ответа
+        type: object
+      message:
+        description: Текста ошибки
+        type: string
+      status:
+        description: Статус ответа
+        type: string
+    type: object
+  repository.Cache:
+    properties:
+      key:
+        description: Ключ кэша
+        type: string
+      value:
+        description: Значение кэша
+        type: string
+    required:
+    - key
+    - value
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: Микросервис для управления структурами данных типа «ключ — значение».
+  title: Cacher
+  version: "1.0"
+paths:
+  /delete/{key}:
+    delete:
+      description: Удаляет одну запись по ключу
+      operationId: delete-handle
+      parameters:
+      - description: ключ кэша
+        in: path
+        name: key
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.response'
+        "404":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.response'
+      summary: Удаляет одну запись по ключу
+      tags:
+      - api
+  /get/{key}:
+    get:
+      description: Возвращет одну запись по ключу
+      operationId: get-one-handle
+      parameters:
+      - description: ключ кэша
+        in: path
+        name: key
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/repository.Cache'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.response'
+        "404":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.response'
+      summary: Возвращет одну запись по ключу
+      tags:
+      - api
+  /list:
+    get:
+      description: Возвращет все записи
+      operationId: get-all-handle
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/repository.Cache'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.response'
+        "404":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.response'
+      summary: Возвращет все записи
+      tags:
+      - api
+  /upsert:
+    post:
+      consumes:
+      - application/json
+      description: Обновить запись, если существует, и создает, если нет
+      operationId: upsert-Handle
+      parameters:
+      - description: данные кэша
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/repository.Cache'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/repository.Cache'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.response'
+        "404":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.response'
+      summary: Обновить запись, если существует, и создает, если нет
+      tags:
+      - api
+swagger: "2.0"

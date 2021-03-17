@@ -1,0 +1,240 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Микросервис для управления структурами данных типа «ключ — значение».",
+        "title": "Cacher",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/delete/{key}": {
+            "delete": {
+                "description": "Удаляет одну запись по ключу",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "api"
+                ],
+                "summary": "Удаляет одну запись по ключу",
+                "operationId": "delete-handle",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ключ кэша",
+                        "name": "key",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handler.response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/handler.response"
+                        }
+                    },
+                    "404": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/handler.response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/handler.response"
+                        }
+                    }
+                }
+            }
+        },
+        "/get/{key}": {
+            "get": {
+                "description": "Возвращет одну запись по ключу",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "api"
+                ],
+                "summary": "Возвращет одну запись по ключу",
+                "operationId": "get-one-handle",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ключ кэша",
+                        "name": "key",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/repository.Cache"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/handler.response"
+                        }
+                    },
+                    "404": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/handler.response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/handler.response"
+                        }
+                    }
+                }
+            }
+        },
+        "/list": {
+            "get": {
+                "description": "Возвращет все записи",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "api"
+                ],
+                "summary": "Возвращет все записи",
+                "operationId": "get-all-handle",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/repository.Cache"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/handler.response"
+                        }
+                    },
+                    "404": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/handler.response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/handler.response"
+                        }
+                    }
+                }
+            }
+        },
+        "/upsert": {
+            "post": {
+                "description": "Обновить запись, если существует, и создает, если нет",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "api"
+                ],
+                "summary": "Обновить запись, если существует, и создает, если нет",
+                "operationId": "upsert-Handle",
+                "parameters": [
+                    {
+                        "description": "данные кэша",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/repository.Cache"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/repository.Cache"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/handler.response"
+                        }
+                    },
+                    "404": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/handler.response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/handler.response"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "handler.response": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "description": "Тело ответа",
+                    "type": "object"
+                },
+                "message": {
+                    "description": "Текста ошибки",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "Статус ответа",
+                    "type": "string"
+                }
+            }
+        },
+        "repository.Cache": {
+            "type": "object",
+            "required": [
+                "key",
+                "value"
+            ],
+            "properties": {
+                "key": {
+                    "description": "Ключ кэша",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Значение кэша",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
