@@ -21,7 +21,7 @@ type CacheRepository struct {
 
 // Обновить запись, если существует, и создает, если нет
 func (r *CacheRepository) Upsert(ctx context.Context, cache repository.Cache) (*repository.Cache, error) {
-	_, err := r.GetOneByKey(ctx, cache.Kye)
+	_, err := r.GetOneByKey(ctx, cache.Key)
 	if err != nil && err != repository.CacheNotFountError {
 		return nil, err
 	}
@@ -29,7 +29,7 @@ func (r *CacheRepository) Upsert(ctx context.Context, cache repository.Cache) (*
 	r.Lock()
 	defer r.Unlock()
 
-	r.DB[cache.Kye] = &cache
+	r.DB[cache.Key] = &cache
 
 	return &cache, nil
 }

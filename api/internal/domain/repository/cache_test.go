@@ -19,7 +19,7 @@ func TestNewCache(t *testing.T) {
 		"Передан только ключ": {
 			key:      "test-kye",
 			value:    "",
-			expected: &Cache{Kye: "test-kye"},
+			expected: &Cache{Key: "test-kye"},
 		},
 		"Передано только значение": {
 			key:      "",
@@ -29,7 +29,7 @@ func TestNewCache(t *testing.T) {
 		"Переданы все данные": {
 			key:      "test-kye",
 			value:    "test-value",
-			expected: &Cache{Kye: "test-kye", Value: "test-value"},
+			expected: &Cache{Key: "test-kye", Value: "test-value"},
 		},
 	}
 

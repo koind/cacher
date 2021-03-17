@@ -17,7 +17,7 @@ func init() {
 
 func before() {
 	cache := repository.Cache{
-		Kye:   cacheKey,
+		Key:   cacheKey,
 		Value: "test-value",
 	}
 
@@ -30,7 +30,7 @@ func after() {
 
 func TestCacheRepository_Create(t *testing.T) {
 	newCache := repository.Cache{
-		Kye:   cacheKey,
+		Key:   cacheKey,
 		Value: "test-value2",
 	}
 
@@ -47,7 +47,7 @@ func TestCacheRepository_Update(t *testing.T) {
 	before()
 
 	newCache := repository.Cache{
-		Kye:   cacheKey,
+		Key:   cacheKey,
 		Value: "test-value3",
 	}
 

@@ -27,7 +27,7 @@ type CacheRepositoryInterface interface {
 // Создает новую структуру кэша
 func NewCache(key, value string) *Cache {
 	return &Cache{
-		Kye:   key,
+		Key:   key,
 		Value: value,
 	}
 }
@@ -35,7 +35,7 @@ func NewCache(key, value string) *Cache {
 // Сущность кэша
 type Cache struct {
 	// Ключ кэша
-	Kye string `json:"kye"`
+	Key string `json:"key" validate:"required"`
 	// Значение кэша
-	Value string `json:"value"`
+	Value string `json:"value" validate:"required"`
 }
