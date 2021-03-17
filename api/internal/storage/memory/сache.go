@@ -9,14 +9,14 @@ import (
 // Создает фиктивный репозиторий кэша
 func NewCacheRepository() *CacheRepository {
 	return &CacheRepository{
-		DB: make(map[string]repository.Cache),
+		DB: make(map[string]*repository.Cache),
 	}
 }
 
 // Фиктивный репозиторий кэша
 type CacheRepository struct {
 	sync.RWMutex
-	DB map[string]repository.Cache
+	DB map[string]*repository.Cache
 }
 
 // Обновить запись, если существует, и создает, если нет
@@ -29,7 +29,7 @@ func (r *CacheRepository) Upsert(ctx context.Context, cache repository.Cache) (*
 	r.Lock()
 	defer r.Unlock()
 
-	r.DB[cache.Kye] = cache
+	r.DB[cache.Kye] = &cache
 
 	return &cache, nil
 }
@@ -44,7 +44,7 @@ func (r *CacheRepository) GetOneByKey(ctx context.Context, key string) (*reposit
 		return nil, repository.CacheNotFountError
 	}
 
-	return &cache, nil
+	return cache, nil
 }
 
 // Возвращет все записи
@@ -59,7 +59,7 @@ func (r *CacheRepository) GetAll(ctx context.Context) ([]*repository.Cache, erro
 	list := make([]*repository.Cache, 0, len(r.DB))
 
 	for _, cache := range r.DB {
-		list = append(list, &cache)
+		list = append(list, cache)
 	}
 
 	return list, nil
